@@ -1,21 +1,26 @@
 # Interview Questions Hub - AI-Powered Interview Prep
 
-A beautiful, feature-rich web application for gathering and managing interview questions with AI-powered answer generation. Built with a stunning Neumorphism UI design.
+A beautiful, feature-rich web application for gathering and managing interview questions with AI-powered answer generation and case study practice. Built with a stunning Neumorphism UI design.
 
 ![Interview Questions Hub](https://img.shields.io/badge/Status-Ready-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+
+## 🌐 Live Demo
+**SITE LINK**: https://interviewprephub.netlify.app/
 
 ## ✨ Features
 
 ### 📚 Comprehensive Question Database
 - **45+ Pre-loaded Questions** covering multiple job roles:
-  - Software Engineer
-  - Frontend Developer
-  - Backend Developer
-  - Full Stack Developer
+  - AI Engineer
   - Data Scientist
-  - Product Manager
-  - DevOps Engineer
+  - Data Analyst
+  - AI/ML Engineer
+  - Machine Learning Engineer
+  - Cyber Security Engineer
+  - Security Analyst
+  - Penetration Tester
+  - Security Architect
 
 ### 🎯 Question Management
 - **Filter by Category**: Browse questions by specific job roles
@@ -26,128 +31,150 @@ A beautiful, feature-rich web application for gathering and managing interview q
 - **Favorite Questions**: Mark important questions for quick access
 - **Export/Import**: Backup and share your question database
 
+### 🎴 AI Flashcard Generator (NEW!)
+- **Generate from Content**: Upload documents or paste text
+- **Smart Question Generation**: AI creates relevant interview questions
+- **Multiple Input Methods**:
+  - Upload PDF, DOCX, or TXT files
+  - Paste text directly
+- **Customizable Settings**:
+  - Choose number of flashcards (5-20)
+  - Select difficulty level
+  - Pick question type
+- **Batch Import**: Add multiple questions at once
+
+### 📖 Case Study Generator (NEW!)
+- **AI-Powered Scenarios**: Generate realistic interview case studies
+- **Three Input Methods**:
+  - AI Generate from topic
+  - Upload files (PDF, DOCX, TXT)
+  - Paste existing case studies
+- **Follow-up Questions**: Automatic generation of:
+  - **Why** questions - Explore reasoning
+  - **What** questions - Clarify concepts
+  - **How** questions - Implementation details
+  - **Issues/Challenges** - Edge cases
+- **Interactive Tree View**: Expandable question hierarchy
+- **Practice Mode**: Review scenarios and prepare answers
+
 ### 🤖 AI-Powered Answer Generation
-- **Dual AI Integration**:
-  - **Claude AI** (Anthropic) - Advanced reasoning and detailed explanations
-  - **ChatGPT** (OpenAI) - Comprehensive and well-structured answers
+- **6 AI Providers Supported**:
+  - **Groq** (FREE - Recommended) - Fast and reliable
+  - **Google Gemini** (FREE) - Unlimited usage
+  - **Hugging Face** (FREE) - Open source models
+  - **Ollama** (FREE - Local) - 100% private
+  - **Claude AI** (Anthropic) - Advanced reasoning
+  - **ChatGPT** (OpenAI) - Comprehensive answers
 - **Context-Aware**: AI considers job role, question type, and difficulty
 - **Formatted Responses**: Clean, readable answers with code examples
 - **Custom Answers**: Add your own notes and modifications
 
-### 🎨 Neumorphism UI Design
+### 🎨 Modern Neumorphism UI Design
+- **15+ Animations**: Smooth transitions and effects
 - **Soft Shadows**: Beautiful depth and elevation effects
-- **Smooth Animations**: Polished transitions and interactions
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **Modern Aesthetics**: Clean, professional interface
+- **Gradient Accents**: Eye-catching color schemes
+- **3D Effects**: Floating and hover animations
+- **Responsive Design**: Works perfectly on all devices
+- **Dark/Light Themes**: Choose your preferred mode
 
 ### 💾 Data Persistence
 - **Local Storage**: All data saved in your browser
 - **No Backend Required**: Fully client-side application
 - **Privacy First**: Your data never leaves your device
+- **Export/Import**: Backup and restore your data
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 - A modern web browser (Chrome, Firefox, Safari, Edge)
-- API keys for AI features (optional but recommended):
-  - OpenAI API key for ChatGPT
-  - Anthropic API key for Claude
+- API keys for AI features (FREE options available):
+  - **Groq API** (Recommended - FREE): [Get Key](https://console.groq.com/keys)
+  - **Google Gemini** (FREE): [Get Key](https://makersuite.google.com/app/apikey)
+  - Or use paid options (OpenAI, Anthropic)
 
 ### Installation
 
 1. **Download the Application**
-   - Download all files in the `interview-questions-app` folder
+   - Clone or download this repository
    - Keep the folder structure intact
 
 2. **Open the Application**
    - Simply open `index.html` in your web browser
    - No server or installation required!
 
-3. **Configure AI Integration (Optional)**
+3. **Configure AI Integration**
    - Click the **Settings** button in the header
-   - Add your API keys:
-     - **OpenAI API Key**: Get from [OpenAI Platform](https://platform.openai.com/api-keys)
-     - **Anthropic API Key**: Get from [Anthropic Console](https://console.anthropic.com/)
+   - Add your API key (Groq recommended for FREE usage)
    - Click **Save Settings**
 
 ## 📖 How to Use
 
 ### Browsing Questions
-1. Use the **filter pills** to narrow down questions by:
-   - Job Category (Software Engineer, Data Scientist, etc.)
-   - Question Type (Technical or Behavioral)
-   - Difficulty Level (Easy, Medium, Hard)
+1. Use the **filter pills** to narrow down questions
 2. Use the **search bar** to find specific questions
 3. Click on any question card to view details and generate answers
 
-### Adding Questions
-1. Click the **Add Question** button in the header
-2. Fill in the form:
-   - Select job category
-   - Choose question type
-   - Set difficulty level
-   - Enter the question text
-   - Add relevant tags (comma-separated)
-3. Click **Add Question** to save
+### Generating Flashcards
+1. Click **Generate Flashcards** button
+2. Choose input method:
+   - Upload a document
+   - Paste text content
+3. Configure settings (count, difficulty, type)
+4. Click **Generate Flashcards**
+5. Review and save selected flashcards
+
+### Creating Case Studies
+1. Click **Case Studies** tab
+2. Click **Generate Case Study** button
+3. Choose input method:
+   - AI Generate (enter topic)
+   - Upload file
+   - Paste content
+4. Select follow-up question types
+5. Generate and review
+6. Save to your collection
 
 ### Generating AI Answers
-1. Click on a question card to open the answer modal
-2. Choose your AI provider:
-   - Click **Generate with Claude** for Claude AI
-   - Click **Generate with ChatGPT** for OpenAI GPT
-3. Wait for the AI to generate a comprehensive answer
-4. Optionally add your own notes in the **Custom Answer** field
-5. Click **Save Answer** to store the response
+1. Click on a question card
+2. Choose your AI provider (Groq recommended)
+3. Wait for AI to generate answer
+4. Save the response
 
-### Managing Your Data
-- **Export**: Download your questions as a JSON file
-- **Import**: Load questions from a previously exported file
-- **Reset**: Restore the default question set
-- **Clear**: Remove all questions (use with caution!)
+## 🔑 Getting FREE API Keys
 
-## 🔑 Getting API Keys
+### Groq API (Recommended - FREE)
+1. Visit [Groq Console](https://console.groq.com/keys)
+2. Sign up for free account
+3. Create API key
+4. Copy and paste in Settings
 
-### OpenAI API Key (ChatGPT)
-1. Visit [OpenAI Platform](https://platform.openai.com/api-keys)
-2. Sign up or log in to your account
-3. Navigate to API Keys section
-4. Click "Create new secret key"
-5. Copy the key (starts with `sk-`)
-6. Paste it in the Settings modal
+**Benefits**: Fast, reliable, generous free tier
 
-**Note**: OpenAI API usage is paid. Check their [pricing page](https://openai.com/pricing) for current rates.
+### Google Gemini (FREE)
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with Google account
+3. Create API key
+4. Copy and paste in Settings
 
-### Anthropic API Key (Claude)
-1. Visit [Anthropic Console](https://console.anthropic.com/)
-2. Sign up or log in to your account
-3. Navigate to API Keys section
-4. Create a new API key
-5. Copy the key (starts with `sk-ant-`)
-6. Paste it in the Settings modal
+**Benefits**: Unlimited free usage
 
-**Note**: Anthropic API usage is paid. Check their [pricing page](https://www.anthropic.com/pricing) for current rates.
+### Ollama (FREE - Local)
+1. Install [Ollama](https://ollama.ai/)
+2. Run locally on your machine
+3. 100% free and private
+4. No API key needed
 
 ## 🎨 Customization
 
-### Adding More Job Categories
-Edit `js/data.js` and add questions with new category values. Then update the category filter pills in `index.html`.
+### Themes
+- Switch between Light and Dark themes in Settings
+- Modern gradient effects and animations
+- Neumorphic design elements
 
-### Modifying the Color Scheme
-Edit the CSS variables in `css/styles.css`:
-```css
-:root {
-    --primary-color: #6C63FF;  /* Main accent color */
-    --secondary-color: #4CAF50; /* Secondary accent */
-    --background: #e0e5ec;      /* Background color */
-    /* ... more variables ... */
-}
-```
-
-### Adding More Questions
-You can add questions in three ways:
-1. Use the **Add Question** button in the app
-2. Edit `js/data.js` to add to the default set
-3. Import a JSON file with questions
+### Adding Questions
+- Use the Add Question button
+- Import from JSON files
+- Generate with AI from content
 
 ## 📱 Browser Compatibility
 
@@ -158,60 +185,95 @@ You can add questions in three ways:
 
 ## 🔒 Privacy & Security
 
-- **Local Storage Only**: All data is stored in your browser's local storage
-- **No Tracking**: No analytics or tracking scripts
-- **API Keys**: Stored locally in your browser, never sent to any server except the AI providers
-- **Open Source**: Full transparency - review the code yourself
+- **Local Storage Only**: All data stored in browser
+- **No Tracking**: No analytics or tracking
+- **API Keys**: Stored locally, never shared
+- **Open Source**: Full transparency
 
 ## 💡 Tips for Best Results
 
-### For Technical Questions
-- AI answers include code examples and technical explanations
-- Review and understand the concepts, don't just memorize
-- Practice implementing the solutions yourself
+### For Flashcard Generation
+- Use clear, well-structured content
+- Aim for 500-2000 words for best results
+- Review and edit generated questions
 
-### For Behavioral Questions
-- AI provides STAR method frameworks
-- Customize answers with your own experiences
-- Practice delivering answers out loud
+### For Case Studies
+- Be specific with topics
+- Choose appropriate complexity level
+- Practice answering out loud
 
-### Interview Preparation
-1. Start with Easy questions to build confidence
-2. Progress to Medium and Hard questions
-3. Focus on your target job category
-4. Review favorite questions regularly
-5. Practice explaining answers in your own words
+### For Interview Prep
+1. Start with Easy questions
+2. Progress to Medium and Hard
+3. Focus on your target role
+4. Review favorites regularly
+5. Practice with case studies
 
 ## 🛠️ Technical Stack
 
 - **HTML5**: Semantic markup
-- **CSS3**: Neumorphism design with custom properties
-- **Vanilla JavaScript**: No frameworks, pure JS
+- **CSS3**: Neumorphism design with animations
+- **Vanilla JavaScript**: No frameworks
 - **Local Storage API**: Data persistence
 - **Fetch API**: AI integration
+- **PDF.js**: PDF text extraction
+- **Mammoth.js**: DOCX text extraction
 - **Font Awesome**: Icons
 
 ## 📄 File Structure
 
 ```
 interview-questions-app/
-├── index.html              # Main HTML file
+├── index.html                    # Main HTML file
 ├── css/
-│   └── styles.css         # Neumorphism styles
+│   ├── styles.css               # Main styles
+│   ├── modern-enhancements.css  # Modern animations
+│   └── case-study.css           # Case study styles
 ├── js/
-│   ├── app.js            # Main application logic
-│   ├── ai-integration.js # AI API integration
-│   └── data.js           # Default questions database
-└── README.md             # This file
+│   ├── app.js                   # Main application logic
+│   ├── ai-integration.js        # AI API integration
+│   ├── data.js                  # Default questions
+│   └── case-study-data.js       # Case study data
+├── README.md                     # This file
+├── CASE_STUDY_GUIDE.md          # Case study documentation
+├── FREE_AI_SETUP_GUIDE.md       # AI setup guide
+├── MODERN_DESIGN_FEATURES.md    # Design documentation
+└── TESTING_GUIDE.md             # Testing guide
 ```
+
+## 🎯 New Features in Latest Update
+
+### ✅ Case Study Generator
+- AI-generated interview scenarios
+- Follow-up question system
+- Expandable question tree
+- Multiple input methods
+
+### ✅ Enhanced Flashcard Generator
+- Support for all FREE AI providers
+- File upload (PDF, DOCX, TXT)
+- Batch generation and import
+- Preview and edit before saving
+
+### ✅ Modern Design Enhancements
+- 15+ new animations
+- Gradient effects
+- 3D hover effects
+- Improved responsiveness
+
+### ✅ FREE AI Integration
+- Groq API support (recommended)
+- Google Gemini support
+- Hugging Face support
+- Ollama local support
 
 ## 🤝 Contributing
 
-Feel free to customize and extend this application for your needs:
-- Add more questions to the database
-- Implement additional AI providers
-- Enhance the UI with new features
-- Create themes or color schemes
+Contributions are welcome! Feel free to:
+- Add more questions
+- Implement new features
+- Improve UI/UX
+- Fix bugs
 
 ## 📝 License
 
@@ -219,32 +281,32 @@ This project is open source and available under the MIT License.
 
 ## 🙏 Acknowledgments
 
+- **Groq** for fast FREE AI inference
+- **Google** for Gemini API
 - **OpenAI** for ChatGPT API
 - **Anthropic** for Claude API
 - **Font Awesome** for icons
-- **Neumorphism Design** inspiration from the design community
+- **PDF.js** and **Mammoth.js** for file processing
 
 ## 📞 Support
 
-If you encounter any issues:
-1. Check that your API keys are correctly configured
-2. Ensure you have an active internet connection for AI features
-3. Try clearing your browser cache and reloading
-4. Check the browser console for error messages
+For issues or questions:
+1. Check the documentation files
+2. Review the testing guide
+3. Check browser console for errors
+4. Ensure API keys are configured
 
 ## 🎯 Future Enhancements
 
-Potential features for future versions:
-- Dark mode theme
-- Spaced repetition system for practice
-- Mock interview timer
-- Voice recording for practice
-- Progress tracking and analytics
-- Community question sharing
-- Multiple language support
+- [ ] Spaced repetition system
+- [ ] Mock interview timer
+- [ ] Voice recording practice
+- [ ] Progress tracking
+- [ ] Community sharing
+- [ ] Multiple language support
 
 ---
 
 **Happy Interview Prep! 🚀**
 
-Remember: The key to interview success is practice, preparation, and confidence. Use this tool regularly, understand the concepts deeply, and you'll be ready to ace your interviews!
+Built with ❤️ for interview success. Practice regularly, understand deeply, and ace your interviews!

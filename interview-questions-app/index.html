@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Questions Hub - AI-Powered Prep</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-brain"></i>
+                    Sani's Interview Prep Hub
+                </h1>
+                <div class="header-actions">
+                    <button class="neu-button" id="settingsBtn">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                    <button class="neu-button primary" id="addQuestionBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Question
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Job Category Tabs -->
+            <section class="tabs-section">
+                <div class="tabs-header">
+                    <div class="tabs-nav neu-card" id="jobTabs">
+                        <!-- Tabs will be dynamically generated -->
+                    </div>
+                    <button class="neu-button small" id="manageJobsBtn">
+                        <i class="fas fa-briefcase"></i>
+                        Manage Jobs
+                    </button>
+                </div>
+            </section>
+
+            <!-- Search and Filters -->
+            <section class="search-section">
+                <div class="search-bar neu-card">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search questions...">
+                </div>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Question Type:</label>
+                        <div class="type-pills" id="typeFilter">
+                            <button class="pill active" data-type="all">All</button>
+                            <button class="pill" data-type="Technical">Technical</button>
+                            <button class="pill" data-type="Behavioral">Behavioral</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Difficulty:</label>
+                        <div class="difficulty-pills" id="difficultyFilter">
+                            <button class="pill active" data-difficulty="all">All</button>
+                            <button class="pill" data-difficulty="Easy">Easy</button>
+                            <button class="pill" data-difficulty="Medium">Medium</button>
+                            <button class="pill" data-difficulty="Hard">Hard</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card neu-card">
+                    <i class="fas fa-question-circle"></i>
+                    <div class="stat-info">
+                        <h3 id="totalQuestions">0</h3>
+                        <p>Total Questions</p>
+                    </div>
+                </div>
+                <div class="stat-card neu-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <h3 id="favoriteCount">0</h3>
+                        <p>Favorites</p>
+                    </div>
+                </div>
+                <div class="stat-card neu-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-info">
+                        <h3 id="answeredCount">0</h3>
+                        <p>Answered</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Questions List -->
+            <section class="questions-section">
+                <div class="section-header">
+                    <h2>Interview Questions</h2>
+                    <div class="view-options">
+                        <button class="neu-button small" id="exportBtn">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                        <button class="neu-button small" id="importBtn">
+                            <i class="fas fa-upload"></i>
+                            Import
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="questionsList" class="questions-grid">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+
+                <div id="noResults" class="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <p>No questions found matching your criteria</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Question Modal -->
+    <div id="addQuestionModal" class="modal">
+        <div class="modal-content neu-card">
+            <div class="modal-header">
+                <h2>Add New Question</h2>
+                <button class="close-btn" id="closeAddModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addQuestionForm">
+                    <div class="form-group">
+                        <label>Job Category</label>
+                        <select id="newCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Software Engineer">Software Engineer</option>
+                            <option value="Data Scientist">Data Scientist</option>
+                            <option value="Product Manager">Product Manager</option>
+                            <option value="DevOps Engineer">DevOps Engineer</option>
+                            <option value="Frontend Developer">Frontend Developer</option>
+                            <option value="Backend Developer">Backend Developer</option>
+                            <option value="Full Stack Developer">Full Stack Developer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Question Type</label>
+                        <select id="newType" required>
+                            <option value="">Select Type</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Behavioral">Behavioral</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Difficulty</label>
+                        <select id="newDifficulty" required>
+                            <option value="">Select Difficulty</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Question</label>
+                        <textarea id="newQuestion" rows="4" placeholder="Enter your question..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tags (comma-separated)</label>
+                        <input type="text" id="newTags" placeholder="e.g., javascript, arrays, algorithms">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="neu-button" id="cancelAddBtn">Cancel</button>
+                        <button type="submit" class="neu-button primary">Add Question</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Answer Modal -->
+    <div id="answerModal" class="modal">
+        <div class="modal-content neu-card large">
+            <div class="modal-header">
+                <h2>Question & Answer</h2>
+                <button class="close-btn" id="closeAnswerModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="question-detail">
+                    <div class="question-meta">
+                        <span class="badge" id="modalCategory"></span>
+                        <span class="badge" id="modalType"></span>
+                        <span class="badge" id="modalDifficulty"></span>
+                    </div>
+                    <h3 id="modalQuestion"></h3>
+                    <div class="tags" id="modalTags"></div>
+                </div>
+                
+                <div class="answer-section">
+                    <div class="answer-header">
+                        <h4>Answer</h4>
+                        <div class="ai-options">
+                            <button class="neu-button small" id="generateWithClaude">
+                                <i class="fas fa-robot"></i>
+                                Generate with Claude
+                            </button>
+                            <button class="neu-button small" id="generateWithGPT">
+                                <i class="fas fa-brain"></i>
+                                Generate with ChatGPT
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="answerContent" class="answer-content">
+                        <p class="placeholder">Click a button above to generate an AI-powered answer, or type your own answer below.</p>
+                    </div>
+                    
+                    <div id="loadingAnswer" class="loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Generating answer...</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Custom Answer (Optional)</label>
+                        <textarea id="customAnswer" rows="6" placeholder="Add your own answer or notes..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="neu-button" id="closeAnswerBtn">Close</button>
+                        <button class="neu-button primary" id="saveAnswerBtn">Save Answer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content neu-card">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3><i class="fas fa-key"></i> API Configuration</h3>
+                    <p class="help-text">Configure your AI API keys to enable answer generation</p>
+                    
+                    <div class="form-group">
+                        <label>OpenAI API Key (ChatGPT)</label>
+                        <input type="password" id="openaiKey" placeholder="sk-...">
+                        <small>Get your key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Anthropic API Key (Claude)</label>
+                        <input type="password" id="anthropicKey" placeholder="sk-ant-...">
+                        <small>Get your key from <a href="https://console.anthropic.com/" target="_blank">Anthropic Console</a></small>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3><i class="fas fa-palette"></i> Appearance</h3>
+                    <div class="form-group">
+                        <label>Theme</label>
+                        <select id="themeSelect">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3><i class="fas fa-database"></i> Data Management</h3>
+                    <button class="neu-button" id="clearDataBtn">
+                        <i class="fas fa-trash"></i>
+                        Clear All Data
+                    </button>
+                    <button class="neu-button" id="resetToDefaultBtn">
+                        <i class="fas fa-undo"></i>
+                        Reset to Default Questions
+                    </button>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="neu-button primary" id="saveSettingsBtn">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Jobs Modal -->
+    <div id="manageJobsModal" class="modal">
+        <div class="modal-content neu-card">
+            <div class="modal-header">
+                <h2>Manage Job Categories</h2>
+                <button class="close-btn" id="closeManageJobsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Add New Job Category</label>
+                    <div class="add-job-input">
+                        <input type="text" id="newJobCategory" placeholder="e.g., UI/UX Designer">
+                        <button class="neu-button primary" id="addJobCategoryBtn">
+                            <i class="fas fa-plus"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="jobs-list-section">
+                    <h3>Current Job Categories</h3>
+                    <div id="jobCategoriesList" class="jobs-list">
+                        <!-- Job categories will be listed here -->
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="neu-button" id="closeManageJobsBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/ai-integration.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
