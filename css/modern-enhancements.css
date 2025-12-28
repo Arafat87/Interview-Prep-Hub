@@ -1,0 +1,793 @@
+/* ===================================
+   Modern Interactive Enhancements
+   Additional styles for more modern neumorphic design
+   =================================== */
+
+/* Enhanced Logo with Gradient Text */
+.logo {
+    background: var(--primary-gradient) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(108, 99, 255, 0.3)); }
+    50% { filter: drop-shadow(0 0 16px rgba(108, 99, 255, 0.5)); }
+}
+
+.logo i {
+    background: var(--primary-gradient) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Enhanced Buttons with Ripple Effect */
+.neu-button {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px !important;
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.neu-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(108, 99, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.neu-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.neu-button:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+}
+
+.neu-button:active {
+    box-shadow: var(--neu-shadow-active) !important;
+    transform: translateY(0) scale(0.98) !important;
+}
+
+/* Primary Button Shimmer Effect */
+.neu-button.primary {
+    background: var(--primary-gradient) !important;
+    box-shadow: var(--neu-shadow), 0 0 20px rgba(108, 99, 255, 0.3) !important;
+}
+
+.neu-button.primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.neu-button.primary:hover {
+    background: linear-gradient(135deg, #7b72ff 0%, #8a5fc7 100%) !important;
+    box-shadow: var(--neu-shadow-hover), 0 0 30px rgba(108, 99, 255, 0.5) !important;
+    transform: translateY(-3px) scale(1.05) !important;
+}
+
+/* Enhanced Cards with Top Border Animation */
+.neu-card {
+    border-radius: 24px !important;
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.neu-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal) ease;
+    z-index: 1;
+}
+
+.neu-card:hover::before {
+    transform: scaleX(1);
+}
+
+.neu-card:hover {
+    transform: translateY(-4px) !important;
+}
+
+/* Enhanced Question Cards with Slide Effect */
+.question-card {
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden;
+}
+
+.question-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+    z-index: 0;
+}
+
+.question-card:hover::after {
+    left: 100%;
+}
+
+.question-card:hover {
+    box-shadow: var(--neu-shadow-hover), 0 0 30px rgba(108, 99, 255, 0.2) !important;
+    transform: translateY(-8px) scale(1.02) !important;
+}
+
+.question-card:active {
+    transform: translateY(-4px) scale(1) !important;
+}
+
+/* Enhanced Badges with Hover Effects */
+.badge {
+    padding: 6px 14px !important;
+    border-radius: 12px !important;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-fast) ease !important;
+}
+
+.badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.badge:hover::before {
+    left: 100%;
+}
+
+.badge.category {
+    background: var(--primary-gradient) !important;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+
+.badge.category:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+}
+
+.badge.type {
+    background: linear-gradient(135deg, #42a5f5 0%, #2196F3 100%) !important;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.badge.type:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+/* Enhanced Stat Cards with Side Border */
+.stat-card {
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal) ease !important;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-gradient);
+    transform: scaleY(0);
+    transition: transform var(--transition-normal) ease;
+}
+
+.stat-card:hover::before {
+    transform: scaleY(1);
+}
+
+.stat-card:hover {
+    transform: translateX(5px) !important;
+}
+
+.stat-card i {
+    background: var(--primary-gradient) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Enhanced Tabs with Bottom Border Animation */
+.tab-btn {
+    border-radius: 16px !important;
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal) ease;
+}
+
+.tab-btn:hover::before {
+    transform: scaleX(1);
+}
+
+.tab-btn:hover {
+    transform: translateY(-3px) !important;
+}
+
+.tab-btn.active {
+    background: var(--primary-gradient) !important;
+    box-shadow: var(--neu-shadow), 0 0 20px rgba(108, 99, 255, 0.4) !important;
+    animation: tabPulse 2s ease-in-out infinite;
+}
+
+@keyframes tabPulse {
+    0%, 100% { box-shadow: var(--neu-shadow), 0 0 20px rgba(108, 99, 255, 0.4); }
+    50% { box-shadow: var(--neu-shadow), 0 0 30px rgba(108, 99, 255, 0.6); }
+}
+
+.tab-btn.active::before {
+    transform: scaleX(1);
+}
+
+/* Enhanced Pills with Ripple Effect */
+.pill {
+    padding: 8px 18px !important;
+    border-radius: 24px !important;
+    transition: all var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.pill::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(108, 99, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.pill:hover::after {
+    width: 200px;
+    height: 200px;
+}
+
+.pill:hover {
+    transform: scale(1.05) !important;
+}
+
+.pill.active {
+    background: var(--primary-gradient) !important;
+    box-shadow: var(--neu-shadow), 0 0 15px rgba(108, 99, 255, 0.4) !important;
+    transform: scale(1.05) !important;
+}
+
+.pill.active::after {
+    width: 200px;
+    height: 200px;
+}
+
+/* Enhanced Search Bar with Focus Glow */
+.search-bar {
+    transition: all var(--transition-normal) ease;
+}
+
+.search-bar:focus-within {
+    box-shadow: var(--neu-shadow-hover), 0 0 20px rgba(108, 99, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.search-bar input:focus {
+    color: var(--primary-color);
+}
+
+/* Enhanced File Dropzone with Pulse Animation */
+.file-dropzone {
+    position: relative;
+    overflow: hidden;
+}
+
+.file-dropzone::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: dropzonePulse 3s ease-in-out infinite;
+}
+
+@keyframes dropzonePulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.2; }
+}
+
+.file-dropzone:hover::before {
+    animation: dropzonePulse 1.5s ease-in-out infinite;
+}
+
+.file-dropzone i {
+    position: relative;
+    z-index: 1;
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Enhanced Upload Tabs with Slide Effect */
+.upload-tab {
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal) ease;
+}
+
+.upload-tab:hover::after {
+    transform: scaleX(1);
+}
+
+.upload-tab.active::after {
+    transform: scaleX(1);
+}
+
+/* Enhanced Preview Flashcards with 3D Effect */
+.preview-flashcard {
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform-style: preserve-3d;
+}
+
+.preview-flashcard:hover {
+    transform: translateY(-5px) rotateX(2deg) !important;
+    box-shadow: var(--neu-shadow-hover), 0 10px 40px rgba(108, 99, 255, 0.2) !important;
+}
+
+.preview-flashcard.selected {
+    border: 2px solid transparent !important;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box,
+                var(--primary-gradient) border-box !important;
+    animation: selectedPulse 2s ease-in-out infinite;
+}
+
+@keyframes selectedPulse {
+    0%, 100% { box-shadow: var(--neu-shadow-hover), 0 0 20px rgba(108, 99, 255, 0.3); }
+    50% { box-shadow: var(--neu-shadow-hover), 0 0 30px rgba(108, 99, 255, 0.5); }
+}
+
+/* Enhanced Progress Bar with Gradient Animation */
+.progress-fill {
+    background: var(--primary-gradient) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progressShimmer 2s infinite;
+}
+
+@keyframes progressShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Enhanced Modal with Backdrop Blur */
+.modal {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+.modal-content {
+    animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Enhanced Close Button with Rotation */
+.close-btn {
+    transition: all var(--transition-normal) ease !important;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg) scale(1.1) !important;
+}
+
+/* Enhanced Form Inputs with Glow on Focus */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    box-shadow: var(--neu-shadow-inset), 0 0 0 3px rgba(108, 99, 255, 0.2), 0 0 20px rgba(108, 99, 255, 0.1) !important;
+}
+
+/* Enhanced Favorite Button with Star Animation */
+.favorite-btn {
+    transition: all var(--transition-normal) ease !important;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.2) rotate(15deg);
+}
+
+.favorite-btn.active {
+    animation: starTwinkle 1s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #FFD700); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 10px #FFD700); }
+}
+
+/* Enhanced Tags with Hover Lift */
+.tag {
+    transition: all var(--transition-fast) ease !important;
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--neu-shadow) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Enhanced Icon Buttons with Rotation */
+.icon-btn {
+    transition: all var(--transition-normal) ease !important;
+}
+
+.icon-btn:hover {
+    transform: scale(1.2) rotate(10deg) !important;
+}
+
+.icon-btn.delete-btn:hover {
+    color: var(--error) !important;
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0) scale(1.2); }
+    25% { transform: translateX(-5px) scale(1.2) rotate(-10deg); }
+    75% { transform: translateX(5px) scale(1.2) rotate(10deg); }
+}
+
+/* Enhanced Toast with Slide and Bounce */
+.toast {
+    animation: toastSlideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(400px) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.toast.show {
+    animation: toastBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes toastBounce {
+    0% { transform: translateX(400px); }
+    60% { transform: translateX(-20px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Enhanced Job Item with Slide Effect */
+.job-item {
+    transition: all var(--transition-normal) ease !important;
+    position: relative;
+}
+
+.job-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: var(--primary-gradient);
+    transform: scaleY(0);
+    transition: transform var(--transition-normal) ease;
+}
+
+.job-item:hover::before {
+    transform: scaleY(1);
+}
+
+.job-item:hover {
+    transform: translateX(5px) !important;
+}
+
+.job-item-icon {
+    background: var(--primary-gradient) !important;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    animation: iconRotate 10s linear infinite;
+}
+
+@keyframes iconRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.job-item:hover .job-item-icon {
+    animation: iconRotate 2s linear infinite;
+}
+
+/* Enhanced Slider Thumb with Pulse */
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    background: var(--primary-gradient) !important;
+    box-shadow: var(--neu-shadow-small), 0 0 10px rgba(108, 99, 255, 0.3) !important;
+    transition: all var(--transition-fast) ease;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: var(--neu-shadow), 0 0 15px rgba(108, 99, 255, 0.5) !important;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+    background: var(--primary-gradient) !important;
+    box-shadow: var(--neu-shadow-small), 0 0 10px rgba(108, 99, 255, 0.3) !important;
+    transition: all var(--transition-fast) ease;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: var(--neu-shadow), 0 0 15px rgba(108, 99, 255, 0.5) !important;
+}
+
+/* Enhanced Slider Value with Bounce */
+.slider-value {
+    animation: valueBounce 0.3s ease;
+}
+
+@keyframes valueBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Enhanced Edit Button with Icon Rotation */
+.edit-flashcard-btn:hover i {
+    animation: iconSpin 0.5s ease;
+}
+
+@keyframes iconSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Enhanced Checkbox with Scale Animation */
+.preview-flashcard-checkbox input[type="checkbox"] {
+    transition: all var(--transition-fast) ease;
+}
+
+.preview-flashcard-checkbox input[type="checkbox"]:hover {
+    transform: scale(1.2);
+}
+
+.preview-flashcard-checkbox input[type="checkbox"]:checked {
+    animation: checkboxPop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkboxPop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Enhanced Scrollbar with Gradient */
+::-webkit-scrollbar-thumb {
+    background: var(--primary-gradient) !important;
+    border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #7b72ff 0%, #8a5fc7 100%) !important;
+}
+
+/* Floating Animation for Icons */
+.progress-icon i {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Stagger Animation for Question Cards */
+.question-card:nth-child(1) { animation-delay: 0s; }
+.question-card:nth-child(2) { animation-delay: 0.1s; }
+.question-card:nth-child(3) { animation-delay: 0.2s; }
+.question-card:nth-child(4) { animation-delay: 0.3s; }
+.question-card:nth-child(5) { animation-delay: 0.4s; }
+.question-card:nth-child(6) { animation-delay: 0.5s; }
+
+/* Stagger Animation for Tabs */
+.tab-btn:nth-child(1) { animation-delay: 0s; }
+.tab-btn:nth-child(2) { animation-delay: 0.05s; }
+.tab-btn:nth-child(3) { animation-delay: 0.1s; }
+.tab-btn:nth-child(4) { animation-delay: 0.15s; }
+.tab-btn:nth-child(5) { animation-delay: 0.2s; }
+.tab-btn:nth-child(6) { animation-delay: 0.25s; }
+.tab-btn:nth-child(7) { animation-delay: 0.3s; }
+.tab-btn:nth-child(8) { animation-delay: 0.35s; }
+.tab-btn:nth-child(9) { animation-delay: 0.4s; }
+.tab-btn:nth-child(10) { animation-delay: 0.45s; }
+
+/* Enhanced Stat Info with Number Counter Animation */
+.stat-info h3 {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Micro-interactions for Better UX */
+button, .pill, .tab-btn, .badge, .tag {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced Modal Header with Gradient */
+.modal-header h2 {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Enhanced Config Section with Glow */
+.config-section {
+    position: relative;
+}
+
+.config-section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--primary-gradient);
+    border-radius: 17px;
+    opacity: 0;
+    transition: opacity var(--transition-normal) ease;
+    z-index: -1;
+}
+
+.config-section:hover::before {
+    opacity: 0.1;
+}
+
+/* Loading Spinner Enhancement */
+.loading i {
+    animation: spinGlow 1.5s linear infinite;
+}
+
+@keyframes spinGlow {
+    0% { transform: rotate(0deg); filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.5)); }
+    50% { filter: drop-shadow(0 0 15px rgba(108, 99, 255, 0.8)); }
+    100% { transform: rotate(360deg); filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.5)); }
+}
+
+/* Answered Indicator with Pulse */
+.answered-indicator {
+    animation: checkPulse 2s ease-in-out infinite;
+}
+
+@keyframes checkPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Enhanced Header with Glassmorphism */
+.header {
+    backdrop-filter: blur(10px);
+    background: rgba(224, 229, 236, 0.95) !important;
+}
+
+[data-theme="dark"] .header {
+    background: rgba(22, 33, 62, 0.95) !important;
+}
+
+/* Particle Effect on Hover (Optional - can be toggled) */
+@keyframes particleFloat {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+}

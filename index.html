@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Questions Hub - AI-Powered Prep</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modern-enhancements.css">
+    <link rel="stylesheet" href="css/case-study.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PDF.js for PDF text extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- Mammoth.js for DOCX text extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-brain"></i>
+                    Sani's Interview Prep Hub
+                </h1>
+                <div class="header-actions">
+                    <button class="neu-button" id="settingsBtn">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                    <button class="neu-button secondary" id="generateFlashcardsBtn">
+                        <i class="fas fa-magic"></i>
+                        Generate Flashcards
+                    </button>
+                    <button class="neu-button primary" id="addQuestionBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Question
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Main Navigation Tabs -->
+            <section class="main-nav-section">
+                <div class="main-nav neu-card">
+                    <button class="main-nav-btn active" data-view="questions">
+                        <i class="fas fa-question-circle"></i>
+                        Interview Questions
+                    </button>
+                    <button class="main-nav-btn" data-view="case-studies">
+                        <i class="fas fa-briefcase"></i>
+                        Case Studies
+                    </button>
+                </div>
+            </section>
+
+            <!-- Job Category Tabs -->
+            <section class="tabs-section">
+                <div class="tabs-header">
+                    <div class="tabs-nav neu-card" id="jobTabs">
+                        <!-- Tabs will be dynamically generated -->
+                    </div>
+                    <button class="neu-button small" id="manageJobsBtn">
+                        <i class="fas fa-briefcase"></i>
+                        Manage Jobs
+                    </button>
+                </div>
+            </section>
+
+            <!-- Search and Filters -->
+            <section class="search-section">
+                <div class="search-bar neu-card">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search questions...">
+                </div>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Question Type:</label>
+                        <div class="type-pills" id="typeFilter">
+                            <button class="pill active" data-type="all">All</button>
+                            <button class="pill" data-type="Technical">Technical</button>
+                            <button class="pill" data-type="Behavioral">Behavioral</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Difficulty:</label>
+                        <div class="difficulty-pills" id="difficultyFilter">
+                            <button class="pill active" data-difficulty="all">All</button>
+                            <button class="pill" data-difficulty="Easy">Easy</button>
+                            <button class="pill" data-difficulty="Medium">Medium</button>
+                            <button class="pill" data-difficulty="Hard">Hard</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card neu-card">
+                    <i class="fas fa-question-circle"></i>
+                    <div class="stat-info">
+                        <h3 id="totalQuestions">0</h3>
+                        <p>Total Questions</p>
+                    </div>
+                </div>
+                <div class="stat-card neu-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <h3 id="favoriteCount">0</h3>
+                        <p>Favorites</p>
+                    </div>
+                </div>
+                <div class="stat-card neu-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-info">
+                        <h3 id="answeredCount">0</h3>
+                        <p>Answered</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Questions View -->
+            <div id="questionsView" class="content-view active">
+                <!-- Questions List -->
+                <section class="questions-section">
+                    <div class="section-header">
+                        <h2>Interview Questions</h2>
+                        <div class="view-options">
+                            <button class="neu-button small" id="exportBtn">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                            <button class="neu-button small" id="importBtn">
+                                <i class="fas fa-upload"></i>
+                                Import
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="questionsList" class="questions-grid">
+                        <!-- Questions will be dynamically loaded here -->
+                    </div>
+
+                    <div id="noResults" class="no-results" style="display: none;">
+                        <i class="fas fa-search"></i>
+                        <p>No questions found matching your criteria</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Case Studies View -->
+            <div id="caseStudiesView" class="content-view">
+                <section class="case-studies-section">
+                    <div class="section-header">
+                        <h2>Case Studies</h2>
+                        <div class="view-options">
+                            <button class="neu-button primary" id="generateCaseStudyBtn">
+                                <i class="fas fa-magic"></i>
+                                Generate Case Study
+                            </button>
+                            <button class="neu-button small" id="exportCaseStudiesBtn">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="caseStudiesList" class="case-studies-grid">
+                        <!-- Case studies will be dynamically loaded here -->
+                    </div>
+
+                    <div id="noCaseStudies" class="no-results" style="display: none;">
+                        <i class="fas fa-briefcase"></i>
+                        <p>No case studies yet. Generate your first case study!</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Question Modal -->
+    <div id="addQuestionModal" class="modal">
+        <div class="modal-content neu-card">
+            <div class="modal-header">
+                <h2>Add New Question</h2>
+                <button class="close-btn" id="closeAddModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addQuestionForm">
+                    <div class="form-group">
+                        <label>Job Category</label>
+                        <select id="newCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="AI Engineer">AI Engineer</option>
+                            <option value="Data Scientist">Data Scientist</option>
+                            <option value="Data Analyst">Data Analyst</option>
+                            <option value="AI/ML Engineer">AI/ML Engineer</option>
+                            <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+                            <option value="Cyber Security Engineer">Cyber Security Engineer</option>
+                            <option value="Security Analyst">Security Analyst</option>
+                            <option value="Penetration Tester">Penetration Tester</option>
+                            <option value="Security Architect">Security Architect</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Question Type</label>
+                        <select id="newType" required>
+                            <option value="">Select Type</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Behavioral">Behavioral</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Difficulty</label>
+                        <select id="newDifficulty" required>
+                            <option value="">Select Difficulty</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Question</label>
+                        <textarea id="newQuestion" rows="4" placeholder="Enter your question..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tags (comma-separated)</label>
+                        <input type="text" id="newTags" placeholder="e.g., javascript, arrays, algorithms">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="neu-button" id="cancelAddBtn">Cancel</button>
+                        <button type="submit" class="neu-button primary">Add Question</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Answer Modal -->
+    <div id="answerModal" class="modal">
+        <div class="modal-content neu-card large">
+            <div class="modal-header">
+                <h2>Question & Answer</h2>
+                <button class="close-btn" id="closeAnswerModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="question-detail">
+                    <div class="question-meta">
+                        <span class="badge" id="modalCategory"></span>
+                        <span class="badge" id="modalType"></span>
+                        <span class="badge" id="modalDifficulty"></span>
+                    </div>
+                    <h3 id="modalQuestion"></h3>
+                    <div class="tags" id="modalTags"></div>
+                </div>
+                
+                <div class="answer-section">
+                    <div class="answer-header">
+                        <h4>Answer</h4>
+                        <div class="ai-options">
+                            <button class="neu-button small" id="generateWithClaude">
+                                <i class="fas fa-robot"></i>
+                                Generate with Claude
+                            </button>
+                            <button class="neu-button small" id="generateWithGPT">
+                                <i class="fas fa-brain"></i>
+                                Generate with ChatGPT
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="answerContent" class="answer-content">
+                        <p class="placeholder">Click a button above to generate an AI-powered answer, or type your own answer below.</p>
+                    </div>
+                    
+                    <div id="loadingAnswer" class="loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Generating answer...</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Custom Answer (Optional)</label>
+                        <textarea id="customAnswer" rows="6" placeholder="Add your own answer or notes..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="neu-button" id="closeAnswerBtn">Close</button>
+                        <button class="neu-button primary" id="saveAnswerBtn">Save Answer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content neu-card">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" id="closeSettingsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3><i class="fas fa-key"></i> API Configuration</h3>
+                    <p class="help-text">Configure your AI API keys to enable answer generation</p>
+                    
+                    <h4 style="color: var(--success); margin-top: 20px;">💰 Free Options (Recommended)</h4>
+                    
+                    <div class="form-group">
+                        <label>🆓 Groq API Key (FREE - RECOMMENDED ⭐)</label>
+                        <input type="password" id="groqKey" placeholder="gsk_...">
+                        <small>Get FREE key from <a href="https://console.groq.com/keys" target="_blank">Groq Console</a> - Most reliable, super fast, free tier!</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>🆓 Google Gemini API Key (FREE)</label>
+                        <input type="password" id="geminiKey" placeholder="AIza...">
+                        <small>Get FREE key from <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a> - May have compatibility issues</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>🆓 Hugging Face API Key (FREE)</label>
+                        <input type="password" id="huggingfaceKey" placeholder="hf_...">
+                        <small>Get FREE key from <a href="https://huggingface.co/settings/tokens" target="_blank">Hugging Face</a> - Free inference API!</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>💻 Ollama URL (100% FREE - Local)</label>
+                        <input type="text" id="ollamaUrl" placeholder="http://localhost:11434">
+                        <small>Run models locally! Install from <a href="https://ollama.ai" target="_blank">ollama.ai</a> - No API key needed!</small>
+                    </div>
+                    
+                    <h4 style="color: var(--warning); margin-top: 30px;">💳 Paid Options</h4>
+                    
+                    <div class="form-group">
+                        <label>OpenAI API Key (ChatGPT) - Paid</label>
+                        <input type="password" id="openaiKey" placeholder="sk-...">
+                        <small>Get your key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Anthropic API Key (Claude) - Paid</label>
+                        <input type="password" id="anthropicKey" placeholder="sk-ant-...">
+                        <small>Get your key from <a href="https://console.anthropic.com/" target="_blank">Anthropic Console</a></small>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3><i class="fas fa-palette"></i> Appearance</h3>
+                    <div class="form-group">
+                        <label>Theme</label>
+                        <select id="themeSelect">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3><i class="fas fa-database"></i> Data Management</h3>
+                    <button class="neu-button" id="clearDataBtn">
+                        <i class="fas fa-trash"></i>
+                        Clear All Data
+                    </button>
+                    <button class="neu-button" id="resetToDefaultBtn">
+                        <i class="fas fa-undo"></i>
+                        Reset to Default Questions
+                    </button>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="neu-button primary" id="saveSettingsBtn">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flashcard Generator Modal -->
+    <div id="flashcardGeneratorModal" class="modal">
+        <div class="modal-content neu-card large">
+            <div class="modal-header">
+                <h2><i class="fas fa-magic"></i> AI Flashcard Generator</h2>
+                <button class="close-btn" id="closeFlashcardModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="flashcard-generator-container">
+                    <!-- Step 1: Content Input -->
+                    <div class="generator-step" id="contentInputStep">
+                        <div class="step-header">
+                            <h3><i class="fas fa-file-upload"></i> Step 1: Upload Content</h3>
+                            <p class="help-text">Upload a document or paste text to generate flashcards from</p>
+                        </div>
+
+                        <!-- File Upload Section -->
+                        <div class="upload-section">
+                            <div class="upload-tabs">
+                                <button class="upload-tab active" data-tab="file">
+                                    <i class="fas fa-file-upload"></i>
+                                    Upload File
+                                </button>
+                                <button class="upload-tab" data-tab="text">
+                                    <i class="fas fa-keyboard"></i>
+                                    Paste Text
+                                </button>
+                            </div>
+
+                            <!-- File Upload Tab -->
+                            <div class="upload-content active" id="fileUploadTab">
+                                <div class="file-dropzone neu-card" id="fileDropzone">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h4>Drag & Drop your file here</h4>
+                                    <p>or click to browse</p>
+                                    <small>Supported formats: PDF, DOCX, TXT (Max 10MB)</small>
+                                    <input type="file" id="fileInput" accept=".pdf,.docx,.txt" hidden>
+                                </div>
+                                <div class="uploaded-file" id="uploadedFile" style="display: none;">
+                                    <div class="file-info">
+                                        <i class="fas fa-file-alt"></i>
+                                        <div class="file-details">
+                                            <h4 id="fileName"></h4>
+                                            <p id="fileSize"></p>
+                                        </div>
+                                    </div>
+                                    <button class="icon-btn" id="removeFile">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Text Input Tab -->
+                            <div class="upload-content" id="textInputTab">
+                                <div class="form-group">
+                                    <textarea id="contentText" rows="12" placeholder="Paste your content here... (e.g., study notes, article, documentation)"></textarea>
+                                    <small id="charCount">0 characters</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuration Section -->
+                        <div class="config-section">
+                            <h4><i class="fas fa-sliders-h"></i> Generation Settings</h4>
+                            
+                            <div class="config-grid">
+                                <div class="form-group">
+                                    <label>Number of Flashcards</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="flashcardCount" min="5" max="20" value="10" step="1">
+                                        <span class="slider-value" id="flashcardCountValue">10</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Job Category</label>
+                                    <select id="flashcardCategory" required>
+                                        <option value="">Select Category</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Question Type</label>
+                                    <select id="flashcardType" required>
+                                        <option value="Technical">Technical</option>
+                                        <option value="Behavioral">Behavioral</option>
+                                        <option value="Mixed">Mixed (Both)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Difficulty Level</label>
+                                    <select id="flashcardDifficulty" required>
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Hard">Hard</option>
+                                        <option value="Mixed">Mixed (All)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>AI Provider</label>
+                                    <select id="flashcardAI" required>
+                                        <optgroup label="🆓 Free Options (Recommended)">
+                                            <option value="groq" selected>Groq - Mixtral (FREE & Fast) ⭐ RECOMMENDED</option>
+                                            <option value="gemini">Google Gemini (FREE)</option>
+                                            <option value="huggingface">Hugging Face - Mistral (FREE)</option>
+                                            <option value="ollama">Ollama - Local (100% FREE)</option>
+                                        </optgroup>
+                                        <optgroup label="💳 Paid Options">
+                                            <option value="claude">Claude (Anthropic)</option>
+                                            <option value="gpt">ChatGPT (OpenAI)</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="neu-button" id="cancelGenerateBtn">Cancel</button>
+                            <button class="neu-button primary" id="startGenerateBtn">
+                                <i class="fas fa-magic"></i>
+                                Generate Flashcards
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Generation Progress -->
+                    <div class="generator-step" id="generationProgressStep" style="display: none;">
+                        <div class="progress-container">
+                            <div class="progress-icon">
+                                <i class="fas fa-magic fa-spin"></i>
+                            </div>
+                            <h3>Generating Flashcards...</h3>
+                            <p id="progressMessage">Analyzing content and creating questions...</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <small id="progressPercent">0%</small>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Preview & Edit -->
+                    <div class="generator-step" id="previewStep" style="display: none;">
+                        <div class="step-header">
+                            <h3><i class="fas fa-eye"></i> Step 2: Review & Edit Flashcards</h3>
+                            <p class="help-text">Review the generated flashcards and make any edits before saving</p>
+                        </div>
+
+                        <div class="preview-actions">
+                            <button class="neu-button small" id="selectAllFlashcards">
+                                <i class="fas fa-check-double"></i>
+                                Select All
+                            </button>
+                            <button class="neu-button small" id="deselectAllFlashcards">
+                                <i class="fas fa-times"></i>
+                                Deselect All
+                            </button>
+                            <span class="selected-count" id="selectedCount">0 selected</span>
+                        </div>
+
+                        <div class="flashcards-preview" id="flashcardsPreview">
+                            <!-- Generated flashcards will be displayed here -->
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="neu-button" id="backToInputBtn">
+                                <i class="fas fa-arrow-left"></i>
+                                Back
+                            </button>
+                            <button class="neu-button primary" id="saveFlashcardsBtn">
+                                <i class="fas fa-save"></i>
+                                Save Selected Flashcards
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Jobs Modal -->
+    <div id="manageJobsModal" class="modal">
+        <div class="modal-content neu-card">
+            <div class="modal-header">
+                <h2>Manage Job Categories</h2>
+                <button class="close-btn" id="closeManageJobsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Add New Job Category</label>
+                    <div class="add-job-input">
+                        <input type="text" id="newJobCategory" placeholder="e.g., UI/UX Designer">
+                        <button class="neu-button primary" id="addJobCategoryBtn">
+                            <i class="fas fa-plus"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="jobs-list-section">
+                    <h3>Current Job Categories</h3>
+                    <div id="jobCategoriesList" class="jobs-list">
+                        <!-- Job categories will be listed here -->
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="neu-button" id="closeManageJobsBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case Study Generator Modal -->
+    <div id="caseStudyGeneratorModal" class="modal">
+        <div class="modal-content neu-card large">
+            <div class="modal-header">
+                <h2><i class="fas fa-briefcase"></i> AI Case Study Generator</h2>
+                <button class="close-btn" id="closeCaseStudyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="case-study-generator-container">
+                    <!-- Step 1: Input -->
+                    <div class="generator-step" id="caseStudyInputStep">
+                        <div class="step-header">
+                            <h3><i class="fas fa-file-upload"></i> Step 1: Provide Case Study Content</h3>
+                            <p class="help-text">Upload a document, paste content, or let AI generate a case study scenario</p>
+                        </div>
+
+                        <div class="upload-section">
+                            <div class="upload-tabs">
+                                <button class="upload-tab active" data-tab="generate">
+                                    <i class="fas fa-magic"></i>
+                                    AI Generate
+                                </button>
+                                <button class="upload-tab" data-tab="upload">
+                                    <i class="fas fa-file-upload"></i>
+                                    Upload File
+                                </button>
+                                <button class="upload-tab" data-tab="paste">
+                                    <i class="fas fa-keyboard"></i>
+                                    Paste Text
+                                </button>
+                            </div>
+
+                            <!-- AI Generate Tab -->
+                            <div class="upload-content active" id="generateCaseStudyTab">
+                                <div class="form-group">
+                                    <label>Case Study Topic</label>
+                                    <input type="text" id="caseStudyTopic" placeholder="e.g., Building a recommendation system, Securing a cloud infrastructure">
+                                    <small>Describe what the case study should be about</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Complexity Level</label>
+                                    <select id="caseStudyComplexity">
+                                        <option value="basic">Basic - Simple scenario</option>
+                                        <option value="intermediate" selected>Intermediate - Moderate complexity</option>
+                                        <option value="advanced">Advanced - Complex, multi-faceted</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Upload File Tab -->
+                            <div class="upload-content" id="uploadCaseStudyTab">
+                                <div class="file-dropzone neu-card" id="caseStudyDropzone">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h4>Drag & Drop your case study file</h4>
+                                    <p>or click to browse</p>
+                                    <small>Supported formats: PDF, DOCX, TXT (Max 10MB)</small>
+                                    <input type="file" id="caseStudyFileInput" accept=".pdf,.docx,.txt" hidden>
+                                </div>
+                                <div class="uploaded-file" id="uploadedCaseStudyFile" style="display: none;">
+                                    <div class="file-info">
+                                        <i class="fas fa-file-alt"></i>
+                                        <div class="file-details">
+                                            <h4 id="caseStudyFileName"></h4>
+                                            <p id="caseStudyFileSize"></p>
+                                        </div>
+                                    </div>
+                                    <button class="icon-btn" id="removeCaseStudyFile">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Paste Text Tab -->
+                            <div class="upload-content" id="pasteCaseStudyTab">
+                                <div class="form-group">
+                                    <textarea id="caseStudyText" rows="12" placeholder="Paste your case study scenario here..."></textarea>
+                                    <small id="caseStudyCharCount">0 characters</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuration -->
+                        <div class="config-section">
+                            <h4><i class="fas fa-sliders-h"></i> Generation Settings</h4>
+                            
+                            <div class="config-grid">
+                                <div class="form-group">
+                                    <label>Job Category</label>
+                                    <select id="caseStudyCategory" required>
+                                        <option value="">Select Category</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Number of Main Questions</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="caseStudyQuestionCount" min="3" max="8" value="5" step="1">
+                                        <span class="slider-value" id="caseStudyQuestionCountValue">5</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Follow-up Questions per Main Question</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="followUpWhy" checked>
+                                            <span>Why Questions</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="followUpWhat" checked>
+                                            <span>What Questions</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="followUpHow" checked>
+                                            <span>How Questions</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="followUpIssues" checked>
+                                            <span>Issues/Challenges</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>AI Provider</label>
+                                    <select id="caseStudyAI" required>
+                                        <optgroup label="🆓 Free Options (Recommended)">
+                                            <option value="groq" selected>Groq - Llama 3.3 (FREE & Fast) ⭐</option>
+                                            <option value="gemini">Google Gemini (FREE)</option>
+                                            <option value="huggingface">Hugging Face (FREE)</option>
+                                            <option value="ollama">Ollama - Local (100% FREE)</option>
+                                        </optgroup>
+                                        <optgroup label="💳 Paid Options">
+                                            <option value="claude">Claude (Anthropic)</option>
+                                            <option value="gpt">ChatGPT (OpenAI)</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="neu-button" id="cancelCaseStudyBtn">Cancel</button>
+                            <button class="neu-button primary" id="startCaseStudyGeneration">
+                                <i class="fas fa-magic"></i>
+                                Generate Case Study
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Progress -->
+                    <div class="generator-step" id="caseStudyProgressStep" style="display: none;">
+                        <div class="progress-container">
+                            <div class="progress-icon">
+                                <i class="fas fa-magic fa-spin"></i>
+                            </div>
+                            <h3>Generating Case Study...</h3>
+                            <p id="caseStudyProgressMessage">Creating scenario and questions...</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="caseStudyProgressFill"></div>
+                            </div>
+                            <small id="caseStudyProgressPercent">0%</small>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Preview -->
+                    <div class="generator-step" id="caseStudyPreviewStep" style="display: none;">
+                        <div class="step-header">
+                            <h3><i class="fas fa-eye"></i> Step 2: Review Case Study</h3>
+                            <p class="help-text">Review the generated case study and questions before saving</p>
+                        </div>
+
+                        <div id="caseStudyPreview" class="case-study-preview">
+                            <!-- Preview will be rendered here -->
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="neu-button" id="backToCaseStudyInput">
+                                <i class="fas fa-arrow-left"></i>
+                                Back
+                            </button>
+                            <button class="neu-button primary" id="saveCaseStudyBtn">
+                                <i class="fas fa-save"></i>
+                                Save Case Study
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case Study Viewer Modal -->
+    <div id="caseStudyViewerModal" class="modal">
+        <div class="modal-content neu-card large">
+            <div class="modal-header">
+                <h2 id="caseStudyViewerTitle">Case Study</h2>
+                <button class="close-btn" id="closeCaseStudyViewer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="caseStudyViewerContent">
+                    <!-- Case study content will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/case-study-data.js"></script>
+    <script src="js/ai-integration.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
